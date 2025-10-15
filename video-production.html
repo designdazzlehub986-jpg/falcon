@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Production | Falcon Productions</title>
+    <link rel="icon" type="image/png" href="images/fav-f.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Reuse your existing navbar styles */
+        :root {
+            --primary-color: #e8d030;
+            --dark-color: #282a2b;
+            --light-color: #f4f2f2;
+            --gray-color: #363839;
+            --text-color: #747474;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Base Styles */
+        .navbar {
+            background-color: rgba(40, 42, 43, 0.9) !important;
+            padding: 45px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Brand Logo */
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .navbar-brand img {
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        /* Nav Links */
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 12px !important;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Menu Styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            z-index: 1000;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before {
+            transform: translateY(-6px);
+        }
+
+        .navbar-toggler-icon::after {
+            transform: translateY(6px);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            background-color: transparent;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+            transform: rotate(45deg);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Mobile Collapse Menu */
+        .collapse {
+            background-color: var(--dark-color);
+            padding: 20px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1199.98px) {
+            .navbar-brand img {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .navbar-nav {
+                margin-top: 15px;
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+                padding: 10px 15px !important;
+            }
+            
+            .navbar-brand {
+                position: static;
+                transform: none;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .navbar-toggler {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand img {
+                height: 60px;
+            }
+            
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar-brand img {
+                height: 50px;
+            }
+            
+            .navbar-collapse {
+                padding: 15px;
+            }
+            
+            .nav-link {
+                font-size: 0.95rem;
+            }
+        }
+        /* Breadcrumb Section */
+        .breadcrumb-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/team-breadcrumb.png');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .breadcrumb-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .breadcrumb-links li {
+            margin: 0 10px;
+        }
+
+        .breadcrumb-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb-links .separator {
+            color: white;
+        }
+
+        /* Video Production Section */
+        .video-production-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .video-item {
+            margin-bottom: 50px;
+        }
+
+        .video-item-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark-color);
+        }
+
+        .video-item-description {
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            background: #000;
+            border-radius: 0 !important;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 60px 0;
+        }
+
+        .section-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer (same as before) */
+        footer {
+            background-color: var(--primary-color) !important;
+            color: var(--dark-color);
+            padding: 60px 0 30px;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 !important;
+            color: var(--dark-color);
+            text-align: center;
+            line-height: 42px;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background-color: var(--dark-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-legal-links {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links li {
+            margin: 0 15px 10px;
+        }
+
+        .footer-legal-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal-links a:hover {
+            color: var(--gray-color);
+        }
+
+        .footer-services-text {
+            color: var(--dark-color);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .breadcrumb-title {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .breadcrumb-title {
+                font-size: 2rem;
+            }
+            
+            .video-item {
+                margin-bottom: 40px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .breadcrumb-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .video-item-title {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-3 px-sm-5">
+        <!-- Left Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex me-auto">
+            <a class="nav-link" href="index.html">INTRO</a>
+            <a class="nav-link active" href="about.html">ABOUT US</a>
+            <a class="nav-link active" href="team.html">OUR TEAM</a>
+            <a class="nav-link" href="talent.html">TALENT</a>
+        </div>
+        
+        <!-- Mobile Toggler (Hidden on desktop) -->
+        <button class="navbar-toggler ms-auto d-lg-none" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+                aria-controls="navbarCollapse" aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Centered Brand Logo -->
+        <a class="navbar-brand mx-lg-auto mx-0" href="index.html">
+            <img src="images/logo.png" alt="Logo" class="img-fluid">
+        </a>
+        
+        <!-- Right Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex ms-auto">
+            <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+            <a class="nav-link" href="clients.html">CLIENTS</a>
+            <a class="nav-link" href="services.html">SERVICES</a>
+            <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
+        
+        <!-- Collapsible Content (Mobile only) -->
+        <div class="collapse d-lg-none" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">INTRO</a>
+                <a class="nav-link active" href="about.html">ABOUT US</a>
+                <a class="nav-link" href="talent.html">TALENT</a>
+                <a class="nav-link" href="team.html">OUR TEAM</a>
+                <a class="nav-link" href="clients.html">CLIENTS</a>
+                <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+                <a class="nav-link" href="services.html">SERVICES</a>
+                <a class="nav-link" href="contact.html">CONTACT</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb-section">
+        <div class="container">
+            <br><br><br>
+            <h1 class="breadcrumb-title">Video Production</h1>
+            <ul class="breadcrumb-links">
+                <li><a href="#">Home</a></li>
+                <li class="separator">/</li>
+                <li>Video Production</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Video Production Section -->
+    <section class="video-production-section">
+        <div class="container">
+            <h2 class="section-title">Video Production</h2>
+            <br><br>
+            <div class="row">
+                <!-- Column 1 -->
+                <div class="col-lg-6">
+                    <!-- Row 1 -->
+                    <div class="video-item">
+                        <h3 class="video-item-title">FITNESS</h3>
+                        <p class="video-item-description">
+                           SCENIC FITNESS CONTENT PRODUCTION
+                        </p>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/Ces9VC9Wtjg?si=MVkPZ1EgapCxOuXH" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 2 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/_hiv4WNny2g?si=Mc-Z8grRh82HgYFl" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/ULSTGL50ZwM?si=xYcNJtBN7tGn3THn" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/dqXp8WXyG2E?si=UaaipxdYYOcZ3GGE" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 5 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/6Klxo2L6QY4?si=pQv9kYFJetwBEDeI" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 6 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/mqGjQDbzR7U?si=3uSfPiC4SSUL60lY" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div class="col-lg-6">
+                    <!-- Row 1 -->
+                    <div class="video-item">
+                        <h3 class="video-item-title">COMMERCIAL PRODUCTION</h3>
+                        <p class="video-item-description">COMMERCIAL PRODUCT VIDEO PRODUCTION 
+                        </p>
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/tJ2VZBfCU-w?si=0DwtoB9bw6kSmB-s" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                     <!-- Row 2 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/lhOxauTq2kc?si=SKvTb4iIRnGVHQcf" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 3 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/WqtCvT_rbuU?si=B0eyg6vRIUYDZqqJ" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 4 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/Y_ZCU-JdZBY?si=co0xVrTFdtN-WRhe" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 5 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/TK3U-zcp9vs?si=9Za4Glv3Z4qC4ir3" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    
+                    <!-- Row 6 -->
+                    <div class="video-item">
+                        <div class="video-wrapper">
+                            <iframe src="https://www.youtube.com/embed/uUyMSOvbFcI?si=N_krZSZhQXN6z8pr" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="divider"></div>
+
+            <!-- Description -->
+            <p class="section-description">
+                fal·​con | ˈfal-kən /N./ : The fastest animal on the planet with the sharpest vision.
+            </p>
+        </div>
+    </section>
+
+  <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Social Icons -->
+                <div class="col-12 text-center mb-4">
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Steins801" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/falcon.productions/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/falcon-productions1"  target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/channel/UCe2dyvLMoqvLpvZNTQbVtdA" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Legal Links -->
+                <div class="col-12 text-center mb-4">
+                    <ul class="footer-legal-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Text -->
+                <div class="col-lg-8 text-center mb-4">
+                    <p class="footer-services-text">
+                       At Falcon Productions, diversity drives the creative process by including alternative perspectives.  We are committed to inclusion across race, gender, age religion, and identity. That inclusion helps propel our constant evolution, and is always a factor in the production process.
+                    </p>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="col-12 text-center">
+                    <div class="copyright">
+                        <p>&copy; 2025 Falcon Productions. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

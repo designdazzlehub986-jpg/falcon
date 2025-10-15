@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services | Falcon Productions</title>
+    <link rel="icon" type="image/png" href="images/fav-f.png">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <style>
+        :root {
+            --primary-color: #e8d030;
+            --dark-color: #282a2b;
+            --light-color: #f4f2f2;
+            --gray-color: #363839;
+            --text-color: #747474;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+            background: #fff;
+        }
+
+        /* ---------- NAVBAR ---------- */
+        .navbar {
+            background-color: rgba(40, 42, 43, 0.9) !important;
+            padding: 45px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .navbar-brand img { height: 100px; transition: all 0.3s ease; }
+        .navbar.scrolled .navbar-brand img { height: 50px; }
+
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 12px !important;
+            text-align: center;
+        }
+        .nav-link:hover { color: var(--primary-color) !important; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 80%; }
+
+        .navbar-toggler { border: none; padding: 0.5rem; z-index: 1000; }
+        .navbar-toggler:focus { box-shadow: none; }
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px; height: 2px; background-color: white;
+            display: block; transition: all 0.3s ease;
+        }
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px; height: 2px; background-color: white; left: 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-toggler-icon::before { transform: translateY(-6px); }
+        .navbar-toggler-icon::after  { transform: translateY(6px); }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon { background-color: transparent; }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before { transform: rotate(45deg); }
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after  { transform: rotate(-45deg); }
+
+        .collapse {
+            background-color: var(--dark-color);
+            padding: 20px;
+            position: absolute; top: 100%; left: 0; right: 0; z-index: 999;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        @media (max-width: 1199.98px) { .navbar-brand img { height: 70px; } }
+        @media (max-width: 991.98px) {
+            .navbar { padding: 15px 0; }
+            .navbar-nav { margin-top: 15px; }
+            .nav-link { margin: 5px 0; padding: 10px 15px !important; }
+            .navbar-brand { position: static; transform: none; margin-left: auto; margin-right: auto; }
+            .navbar-toggler { order: 2; }
+        }
+        @media (max-width: 767.98px) {
+            .navbar-brand img { height: 60px; }
+            .container-fluid { padding-left: 15px; padding-right: 15px; }
+        }
+        @media (max-width: 575.98px) {
+            .navbar-brand img { height: 50px; }
+            .navbar-collapse { padding: 15px; }
+            .nav-link { font-size: 0.95rem; }
+        }
+
+        /* ---------- BREADCRUMB ---------- */
+        .breadcrumb-section {
+            background-image: linear-gradient(rgba(0,0,0,.6), rgba(0,0,0,.6)), url('images/team-breadcrumb.png');
+            background-size: cover; background-position: center;
+            padding: 120px 0 80px; color: white; text-align: center;
+        }
+        .breadcrumb-title { font-size: 3rem; font-weight: 700; margin-bottom: 20px; }
+        .breadcrumb-links { display: flex; justify-content: center; list-style: none; padding: 0; }
+        .breadcrumb-links li { margin: 0 10px; }
+        .breadcrumb-links a { color: var(--primary-color); text-decoration: none; }
+        .breadcrumb-links .separator { color: white; }
+
+        /* ---------- SECTIONS & GRIDS ---------- */
+        .services-section { padding: 80px 0; background:#fff; }
+
+        .section-title {
+            font-size: 2.5rem; font-weight: 700; text-align: center; margin-bottom: 50px; position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; width: 100px; height: 3px; background: var(--primary-color);
+            bottom: -15px; left: 50%; transform: translateX(-50%);
+        }
+
+        .photo-grid {
+            display: grid; grid-template-columns: repeat(6, 1fr); gap: 15px; margin-bottom: 60px;
+        }
+        .photo-item, .small-photo-item { position: relative; overflow: hidden; border-radius: 0 !important; transition: transform 0.3s ease; cursor: zoom-in; }
+        .photo-item:hover, .small-photo-item:hover { transform: scale(1.03); }
+        .photo-item img { width: 100%; height: 180px; object-fit: cover; display: block; }
+        .small-photo-grid {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 60px;
+        }
+        .small-photo-item img { width: 100%; height: 200px; object-fit: cover; display: block; }
+
+        /* ---------- DRONE SECTION (FULL-BLEED VIDEO) ---------- */
+        .drone-section {
+            position: relative;
+            width: 100vw;           /* full-bleed */
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            overflow: hidden;
+            min-height: 60vh;
+        }
+        .drone-bg-video {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            object-fit: cover; z-index: -1; opacity: 1 !important; /* no opacity */
+            filter: none !important; /* no blur */
+        }
+        /* content inside drone section constrained to a container for nice gutters */
+        .drone-content { position: relative; padding: 80px 0; }
+
+        /* ---------- LOCATION SECTION (BLACK BG + FULL-BLEED OVERLAY SECTIONS) ---------- */
+        .location-section {
+            margin: 80px 0;
+            background: #000; /* solid black background */
+            color: #fff;
+            padding-top: 40px;
+            padding-bottom: 40px;
+        }
+        .location-section .section-title { color: #fff; }
+
+        /* The two overlay sections should be edge-to-edge (no container side padding) */
+        .location-section .section {
+            display: flex; align-items: center;
+            min-height: 500px; margin-bottom: 40px;
+            /* full-bleed breakout to remove container side gaps */
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw);
+            background: #000;
+            justify-content: flex-start; /* default for left section */
+            padding: 0;
+        }
+        .location-section .section-right { flex-direction: row-reverse; justify-content: flex-start; }
+
+        .image-box {
+            position: relative; width: 72%; /* 9/12 */
+            height: 500px; background-color: #000;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .image-box img { width: 100%; height: 100%; object-fit: contain; display: block; background: #000; }
+
+        .text-box {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background-color: #000; color: #fff; padding: 50px 60px; max-width: 380px;
+        }
+        .section-left .text-box { right: 0; }
+        .section-right .text-box { left: 0; }
+
+        .location-gallery {
+            display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin: 40px 0;
+        }
+
+        /* ---------- DIVIDER & FOOTER ---------- */
+        .divider { border-top: 1px solid #ddd; margin: 60px 0; }
+        .section-description { text-align: center; max-width: 800px; margin: 0 auto 40px; font-size: 1.1rem; line-height: 1.8; }
+
+        footer {
+            background-color: var(--primary-color) !important; color: var(--dark-color); padding: 60px 0 30px;
+        }
+        .social-links { margin-bottom: 20px; }
+        .social-links a {
+            display: inline-block; width: 42px; height: 42px; background-color: rgba(0,0,0,0.1);
+            border-radius: 0 !important; color: var(--dark-color); text-align: center; line-height: 42px;
+            margin: 0 8px; transition: all 0.3s ease; font-size: 18px;
+        }
+        .social-links a:hover { background-color: var(--dark-color); color: var(--primary-color); transform: translateY(-3px); }
+        .footer-legal-links { list-style: none; padding: 0; margin: 0 0 25px 0; display: flex; justify-content: center; flex-wrap: wrap; }
+        .footer-legal-links li { margin: 0 15px 10px; }
+        .footer-legal-links a { color: var(--dark-color); text-decoration: none; font-weight: 500; transition: color 0.3s ease; }
+        .footer-legal-links a:hover { color: var(--gray-color); }
+        .footer-services-text { color: var(--dark-color); max-width: 750px; margin: 0 auto; line-height: 1.7; font-size: 1.05rem; }
+        .copyright { border-top: 1px solid rgba(0,0,0,0.1); padding-top: 20px; margin-top: 20px; font-size: 0.9rem; color: var(--dark-color); }
+
+        /* ---------- RESPONSIVE ---------- */
+        @media (max-width: 1200px) {
+            .photo-grid, .location-gallery { grid-template-columns: repeat(4, 1fr); }
+            .small-photo-grid { grid-template-columns: repeat(4, 1fr); }
+        }
+        @media (max-width: 992px) {
+            .breadcrumb-title { font-size: 2.5rem; }
+            .section-title { font-size: 2.2rem; }
+            .photo-grid, .location-gallery { grid-template-columns: repeat(3, 1fr); }
+            .small-photo-grid { grid-template-columns: repeat(3, 1fr); }
+            .image-box { height: 400px; }
+            .text-box { padding: 30px 40px; max-width: 300px; }
+            .text-box h1 { font-size: 2rem; }
+        }
+        @media (max-width: 768px) {
+            .breadcrumb-title { font-size: 2rem; }
+            .photo-grid, .location-gallery { grid-template-columns: repeat(2, 1fr); }
+            .small-photo-grid { grid-template-columns: repeat(2, 1fr); }
+            .photo-item img { height: 150px; }
+            .small-photo-item img { height: 180px; }
+            .image-box { height: 350px; }
+            .text-box { padding: 20px 25px; max-width: 250px; }
+            .text-box h1 { font-size: 1.6rem; }
+            .text-box p { font-size: 0.9rem; }
+        }
+        @media (max-width: 576px) {
+            .breadcrumb-title { font-size: 1.8rem; }
+            .section-title { font-size: 1.8rem; }
+            .photo-grid, .location-gallery, .small-photo-grid { grid-template-columns: 1fr; }
+            .photo-item img { height: 200px; }
+            .small-photo-item img { height: 220px; }
+            .image-box { height: 250px; }
+            .text-box { padding: 15px 20px; max-width: 200px; }
+            .text-box h1 { font-size: 1.4rem; }
+            .text-box p { font-size: 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-3 px-sm-5">
+        <!-- Left Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex me-auto">
+            <a class="nav-link" href="index.html">INTRO</a>
+            <a class="nav-link active" href="about.html">ABOUT US</a>
+            <a class="nav-link active" href="team.html">OUR TEAM</a>
+            <a class="nav-link" href="talent.html">TALENT</a>
+        </div>
+        
+        <!-- Mobile Toggler (Hidden on desktop) -->
+        <button class="navbar-toggler ms-auto d-lg-none" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+                aria-controls="navbarCollapse" aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Centered Brand Logo -->
+        <a class="navbar-brand mx-lg-auto mx-0" href="index.html">
+            <img src="images/logo.png" alt="Logo" class="img-fluid">
+        </a>
+        
+        <!-- Right Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex ms-auto">
+            <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+            <a class="nav-link" href="clients.html">CLIENTS</a>
+            <a class="nav-link" href="services.html">SERVICES</a>
+            <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
+        
+        <!-- Collapsible Content (Mobile only) -->
+        <div class="collapse d-lg-none" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">INTRO</a>
+                <a class="nav-link active" href="about.html">ABOUT US</a>
+                <a class="nav-link" href="talent.html">TALENT</a>
+                <a class="nav-link" href="team.html">OUR TEAM</a>
+                <a class="nav-link" href="clients.html">CLIENTS</a>
+                <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+                <a class="nav-link" href="services.html">SERVICES</a>
+                <a class="nav-link" href="contact.html">CONTACT</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Breadcrumb -->
+<section class="breadcrumb-section">
+    <div class="container">
+        <br><br><br>
+        <h1 class="breadcrumb-title">Location Scouting</h1>
+        <ul class="breadcrumb-links">
+            <li><a href="#">Home</a></li>
+            <li class="separator">/</li>
+            <li>Location Scouting</li>
+        </ul>
+    </div>
+</section>
+
+<section class="services-section" style="background-color: black;">
+    <!-- LOCATION SECTION (black bg + full-bleed overlay sections) -->
+    <div class="location-section" style="margin-top: -20px;">
+        <div class="container">
+            <h3 class="section-title" style="font-size: 2rem; margin-bottom: 30px;">LOCATION SCOUTNG</h3>
+        </div>
+        <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/test.jpg" alt="Norway Fjord" />
+                <div class="text-box">
+                    <h1>Norway</h1>
+                    <p>Fjords | Sunsets | Spectacular</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-11+at+4.10.44+PM.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-11+at+4.01.27+PM.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-11+at+4.19.09+PM.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+11.16.26+PM.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-12+at+2.25.20+PM.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+10.51.37+PM.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+10.52.46+PM.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+11.06.43+PM.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+11.07.21+PM.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-23+at+11.37.39+PM.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/IMG_0042.webp" alt="Iceland" />
+                <div class="text-box">
+                    <h1>Chile</h1>
+                    <p>Colorful | Unique | Diverse</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/IMG_0165.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0158.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0073.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0151.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-26+at+9.51.13+PM.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0179.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0124.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0078.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0147.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-26+at+9.39.24+PM.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+                <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/IMG_3058.webp" alt="France" />
+                <div class="text-box">
+                    <h1>France</h1>
+                    <p>Of Course</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/IMG_3154.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_3084.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/DSC_9333_JPG.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_3152.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_3318.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/DSC03270.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2721.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0297.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0287.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_3156.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/IMG_5215.webp" alt="Italy" />
+                <div class="text-box">
+                    <h1>Italy</h1>
+                    <p>Pizza | Pasta | Picturesque</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/IMG_5218.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2513.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2483.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2387.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2722.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2940.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2631.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2311.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0721.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-29+at+6.59.15+AM.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+
+
+                <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/IMG_0095.webp" alt="Spain" />
+                <div class="text-box">
+                    <h1>Spain</h1>
+                    <p>History | Beaches | Food</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/IMG_0129.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0108.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0094.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0036.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0017.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0040.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_1778.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_1814.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_1941.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_1879.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/Screen+Shot+2019-06-29+at+7.25.50+AM.webp" alt="New Zealand" />
+                <div class="text-box">
+                    <h1>New Zealand</h1>
+                    <p>Simply Stunning</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-29+at+7.26.05+AM.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0028.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-29+at+7.26.25+AM.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0050+2.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0254.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0053.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0125.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0068+2.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0082.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0060.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+
+
+                <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/IMG_0212.webp" alt="Argentina" />
+                <div class="text-box">
+                    <h1>Argentina</h1>
+                    <p>Carne | Architecture | Classic</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/etree1_preview.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_6548.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_2080.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-26+at+10.34.38+PM.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/CIMG3104.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2019-06-26+at+10.36.17+PM.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0088.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0153.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/SIMG_0173.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0092.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/RemoteMediaFile_6553738_0_2021_12_10_07_50_42.webp" alt="ZION" />
+                <div class="text-box">
+                    <h1>ZION</h1>
+                    <p>Like a Lion</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/9C8BCDD9-C3EC-4D4D-86E4-3F2526359E95.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/4047B9B7-F507-489D-9FB4-484973644F90.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/202112_ZionCycling0790.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0149.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0220.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_7370.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_7600.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/TP1_1962.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/TP1_2148.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+8.36.08+PM.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+
+
+                <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/Screen+Shot+2022-03-14+at+8.57.31+PM.webp" alt="ICELAND" />
+                <div class="text-box">
+                    <h1>ICELAND</h1>
+                    <p>The Land of FIRE and ICE</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/14FBCC17-6526-43D1-813F-8650FBDB49D6.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/433B77A7-FDA7-4025-968B-87D1B17285CF.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/AA6A7125-0EE3-445D-B8AB-70EE8EF79973.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/DF324D70-1A85-4B4C-8BDA-7F33853E4362.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/E93B12E2-D597-45E1-88BE-AB79CE6DA6BC.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.09.25+PM.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.38.28+PM.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.19.30+PM.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.22.25+PM.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.34.25+PM.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/D262656F-EBE5-4E1D-A782-9E927D0EC9F7.webp" alt="Croatia" />
+                <div class="text-box">
+                    <h1>Croatia </h1>
+                    <p>The Gem of the Adriatic</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/E0489815-6FFD-4AD5-8DB1-2E946FBAFEB7.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/7AF4248B-595B-4B4A-B762-2166A114C700.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/39DD43B7-DC9C-45B8-9EF6-D447DFF01B01.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/F66757DB-2732-4BBB-9E8B-FD9F705B068E.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/47609CC5-BB36-4951-8BA4-1AD583AAAADC.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/686472DC-4D0B-4487-850F-943A5739DCC8.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.47.17+PM.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/E8C6F25D-E15F-4D4F-8EA2-9137D2E0B07A.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/Screen+Shot+2022-03-14+at+9.58.28+PM.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/E25EDE65-2CFB-4E4B-86BE-06593DEC036F.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+
+
+                <br><br>
+        <!-- Section 1: Image Left / Text Right (full-bleed) -->
+        <section class="section section-left">
+            <div class="image-box">
+                <img src="images/IMG_0285.webp" alt="MOAB" />
+                <div class="text-box">
+                    <h1>MOAB</h1>
+                    <p>Unlike anywhere on Earth</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/IMG_0508.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0135.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0736.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0342.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0477.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0583.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_1014.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0284.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_0327.webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_9896.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+        <br><br>
+        <!-- Section 2: Image Right / Text Left (full-bleed) -->
+        <section class="section section-right">
+            <div class="image-box">
+                <img src="images/IMG_0276.webp" alt="Tuscany" />
+                <div class="text-box">
+                    <h1>Tuscany</h1>
+                    <p>Vineyards | Castles | Classico</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery -->
+        <div class="container">
+            <div class="location-gallery">
+            <a href="#" class="photo-item"><img src="images/51AC4C4B-4C07-4282-B7E9-999281E6FF8A.webp" alt="Action Photography 1"></a>
+            <a href="#" class="photo-item"><img src="images/2EBD574C-7AF6-4F14-ADDC-B5716D9EC9DD.webp" alt="Action Photography 2"></a>
+            <a href="#" class="photo-item"><img src="images/4EA3573B-FFE6-47A0-AC14-5328FB56DB36.webp" alt="Action Photography 3"></a>
+            <a href="#" class="photo-item"><img src="images/64DE67E0-EF53-4B30-ACC6-FFBDE3D8D05F.webp" alt="Action Photography 4"></a>
+            <a href="#" class="photo-item"><img src="images/AEC085AD-D6FE-4DEC-B706-A386267B4005.webp" alt="Action Photography 5"></a>
+            <a href="#" class="photo-item"><img src="images/BE7F6484-C275-4668-8161-9D5DBCAD4E6D.webp" alt="Action Photography 6"></a>
+            <a href="#" class="photo-item"><img src="images/B7B066CE-D4AE-4F0A-BFFB-7D471462879A.webp" alt="Action Photography 7"></a>
+            <a href="#" class="photo-item"><img src="images/DJI_0068.webp" alt="Action Photography 8"></a>
+            <a href="#" class="photo-item"><img src="images/IMG_5215 (1).webp" alt="Action Photography 9"></a>
+            <a href="#" class="photo-item"><img src="images/2021-09-12-18-57-43-999.webp" alt="Action Photography 10"></a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Description -->
+    <div class="container">
+        <p class="section-description">
+           fal·​con | ˈfal-kən /N./ : The fastest animal on the planet with the sharpest vision.
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+                <!-- Social Icons -->
+                <div class="col-12 text-center mb-4">
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Steins801" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/falcon.productions/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/falcon-productions1"  target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/channel/UCe2dyvLMoqvLpvZNTQbVtdA" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+            <div class="col-12 text-center mb-4">
+                <ul class="footer-legal-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+
+            <div class="col-lg-8 text-center mb-4">
+                <p class="footer-services-text">
+                    At Falcon Productions, diversity drives the creative process by including alternative perspectives.  We are committed to inclusion across race, gender, age religion, and identity. That inclusion helps propel our constant evolution, and is always a factor in the production process.
+                </p>
+            </div>
+
+            <div class="col-12 text-center">
+                <div class="copyright">
+                    <p>&copy; 2025 Falcon Productions. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS + jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Image Lightbox (Popup) -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content bg-dark border-0">
+      <div class="modal-body p-0">
+        <img id="modalImage" src="" alt="Preview" class="img-fluid w-100" />
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Sticky navbar shrink on scroll (optional since styles exist)
+  (function() {
+    const nav = document.querySelector('.navbar');
+    function onScroll() {
+      if (window.scrollY > 20) nav.classList.add('scrolled'); else nav.classList.remove('scrolled');
+    }
+    onScroll();
+    window.addEventListener('scroll', onScroll);
+  })();
+
+  // Gallery popup for both big and small grids
+  $(document).on('click', '.photo-item', function (e) {
+    e.preventDefault();
+    const img = $(this).find('img').attr('src');
+    if (!img) return;
+    $('#modalImage').attr('src', img);
+    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+    modal.show();
+  });
+</script>
+
+</body>
+</html>

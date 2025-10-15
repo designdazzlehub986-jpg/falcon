@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Falcon Productions</title>
+    <link rel="icon" type="image/png" href="images/fav-f.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        /* Reuse your existing navbar styles */
+        :root {
+            --primary-color: #e8d030;
+            --dark-color: #282a2b;
+            --light-color: #f4f2f2;
+            --gray-color: #363839;
+            --text-color: #747474;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Base Styles */
+        .navbar {
+            background-color: rgba(40, 42, 43, 0.9) !important;
+            padding: 45px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Brand Logo */
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .navbar-brand img {
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        /* Nav Links */
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 12px !important;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Menu Styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            z-index: 1000;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before {
+            transform: translateY(-6px);
+        }
+
+        .navbar-toggler-icon::after {
+            transform: translateY(6px);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            background-color: transparent;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+            transform: rotate(45deg);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Mobile Collapse Menu */
+        .collapse {
+            background-color: var(--dark-color);
+            padding: 20px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1199.98px) {
+            .navbar-brand img {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .navbar-nav {
+                margin-top: 15px;
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+                padding: 10px 15px !important;
+            }
+            
+            .navbar-brand {
+                position: static;
+                transform: none;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .navbar-toggler {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand img {
+                height: 60px;
+            }
+            
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar-brand img {
+                height: 50px;
+            }
+            
+            .navbar-collapse {
+                padding: 15px;
+            }
+            
+            .nav-link {
+                font-size: 0.95rem;
+            }
+        }
+        /* Breadcrumb Section */
+        .breadcrumb-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('images/privacy-policy-breadcrumb.png');
+            background-size: cover;
+            background-position: center;
+            padding: 120px 0 80px;
+            color: white;
+            text-align: center;
+        }
+
+        .breadcrumb-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+
+        .breadcrumb-links li {
+            margin: 0 10px;
+        }
+
+        .breadcrumb-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .breadcrumb-links .separator {
+            color: white;
+        }
+
+        /* Privacy Policy Content */
+        .privacy-section {
+            padding: 80px 0;
+        }
+
+        .privacy-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .privacy-title::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -15px;
+            left: 0;
+        }
+
+        .privacy-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.5rem;
+            margin: 30px 0 15px;
+            color: var(--dark-color);
+        }
+
+        .privacy-content p {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .privacy-content ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+
+        .privacy-content li {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .divider {
+            border-top: 1px solid #ddd;
+            margin: 60px 0;
+        }
+
+        .privacy-description {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Footer (same as before) */
+        footer {
+            background-color: var(--primary-color) !important;
+            color: var(--dark-color);
+            padding: 60px 0 30px;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 !important;
+            color: var(--dark-color);
+            text-align: center;
+            line-height: 42px;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background-color: var(--dark-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-legal-links {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links li {
+            margin: 0 15px 10px;
+        }
+
+        .footer-legal-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal-links a:hover {
+            color: var(--gray-color);
+        }
+
+        .footer-services-text {
+            color: var(--dark-color);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .breadcrumb-title {
+                font-size: 2.2rem;
+            }
+            
+            .privacy-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .breadcrumb-title {
+                font-size: 1.8rem;
+            }
+            
+            .privacy-title {
+                font-size: 1.5rem;
+            }
+            
+            .privacy-content h3 {
+                font-size: 1.3rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-3 px-sm-5">
+        <!-- Left Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex me-auto">
+            <a class="nav-link" href="index.html">INTRO</a>
+            <a class="nav-link active" href="about.html">ABOUT US</a>
+            <a class="nav-link active" href="team.html">OUR TEAM</a>
+            <a class="nav-link" href="talent.html">TALENT</a>
+        </div>
+        
+        <!-- Mobile Toggler (Hidden on desktop) -->
+        <button class="navbar-toggler ms-auto d-lg-none" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+                aria-controls="navbarCollapse" aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Centered Brand Logo -->
+        <a class="navbar-brand mx-lg-auto mx-0" href="index.html">
+            <img src="images/logo.png" alt="Logo" class="img-fluid">
+        </a>
+        
+        <!-- Right Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex ms-auto">
+            <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+            <a class="nav-link" href="clients.html">CLIENTS</a>
+            <a class="nav-link" href="services.html">SERVICES</a>
+            <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
+        
+        <!-- Collapsible Content (Mobile only) -->
+        <div class="collapse d-lg-none" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">INTRO</a>
+                <a class="nav-link active" href="about.html">ABOUT US</a>
+                <a class="nav-link" href="talent.html">TALENT</a>
+                <a class="nav-link" href="team.html">OUR TEAM</a>
+                <a class="nav-link" href="clients.html">CLIENTS</a>
+                <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+                <a class="nav-link" href="services.html">SERVICES</a>
+                <a class="nav-link" href="contact.html">CONTACT</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <!-- Breadcrumb Section -->
+    <section class="breadcrumb-section">
+        <div class="container">
+        	<br><br><br>
+            <h1 class="breadcrumb-title">Privacy Policy</h1>
+            <ul class="breadcrumb-links">
+                <li><a href="#">Home</a></li>
+                <li class="separator">/</li>
+                <li>Privacy Policy</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Privacy Policy Content -->
+    <section class="privacy-section">
+        <div class="container">
+            <div class="privacy-content">
+                <h2 class="privacy-title">Our Privacy Policy</h2>
+                
+                <p>Last updated: Aug 2025</p>
+                
+                <p>Your privacy is important to us. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website.</p>
+                
+                <h3>Information We Collect</h3>
+                <p>We may collect personal information that you voluntarily provide to us when you:</p>
+                <ul>
+                    <li>Register on our site</li>
+                    <li>Place an order</li>
+                    <li>Subscribe to our newsletter</li>
+                    <li>Fill out a form</li>
+                    <li>Contact us directly</li>
+                </ul>
+                
+                <h3>How We Use Your Information</h3>
+                <p>We may use the information we collect for various purposes, including to:</p>
+                <ul>
+                    <li>Provide, operate, and maintain our website</li>
+                    <li>Improve, personalize, and expand our website</li>
+                    <li>Understand and analyze how you use our website</li>
+                    <li>Develop new products, services, features, and functionality</li>
+                    <li>Communicate with you for customer service and marketing</li>
+                    <li>Process your transactions</li>
+                    <li>Prevent fraud</li>
+                </ul>
+                
+                <h3>Cookies and Tracking Technologies</h3>
+                <p>We use cookies and similar tracking technologies to track activity on our website and hold certain information to improve your browsing experience.</p>
+                
+                <h3>Third-Party Disclosure</h3>
+                <p>We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties unless we provide users with advance notice.</p>
+                
+                <h3>Third-Party Links</h3>
+                <p>Our website may contain links to third-party websites. We have no control over and assume no responsibility for the content or practices of these sites.</p>
+                
+                <h3>Data Security</h3>
+                <p>We implement security measures to maintain the safety of your personal information. However, no electronic transmission or storage is 100% secure.</p>
+                
+                <h3>Your Rights</h3>
+                <p>Depending on your location, you may have certain rights regarding your personal information, including:</p>
+                <ul>
+                    <li>The right to access, update, or delete your information</li>
+                    <li>The right to rectification</li>
+                    <li>The right to object</li>
+                    <li>The right to restrict processing</li>
+                    <li>The right to data portability</li>
+                    <li>The right to withdraw consent</li>
+                </ul>
+                
+                <h3>Children's Information</h3>
+                <p>Our website does not knowingly collect any personal information from children under 13. If you think your child provided this kind of information, please contact us immediately.</p>
+                
+                <h3>Changes to This Policy</h3>
+                <p>We may update our Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page.</p>
+                
+                <h3>Contact Us</h3>
+                <p>If you have any questions about this Privacy Policy, please contact us at privacy@falcon-productions.com.</p>
+                
+                <!-- Divider -->
+                <div class="divider"></div>
+                
+                <!-- Description -->
+                <p class="privacy-description">
+                  fal·​con | ˈfal-kən /N./ : The fastest animal on the planet with the sharpest vision.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row justify-content-center">
+                <!-- Social Icons -->
+                <div class="col-12 text-center mb-4">
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/Steins801" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/falcon.productions/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/company/falcon-productions1"  target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://www.youtube.com/channel/UCe2dyvLMoqvLpvZNTQbVtdA" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Legal Links -->
+                <div class="col-12 text-center mb-4">
+                    <ul class="footer-legal-links">
+                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                        <li><a href="terms-of-service.html">Terms of Service</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services Text -->
+                <div class="col-lg-8 text-center mb-4">
+                    <p class="footer-services-text">
+                       At Falcon Productions, diversity drives the creative process by including alternative perspectives.  We are committed to inclusion across race, gender, age religion, and identity. That inclusion helps propel our constant evolution, and is always a factor in the production process.
+                    </p>
+                </div>
+                
+                <!-- Copyright -->
+                <div class="col-12 text-center">
+                    <div class="copyright">
+                        <p>&copy; 2025 Falcon Productions. All Rights Reserved.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

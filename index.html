@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Falcon Productions</title>
+    <link rel="icon" type="image/png" href="images/fav-f.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --primary-color: #e8d030;
+            --dark-color: #282a2b;
+            --light-color: #f4f2f2;
+            --gray-color: #363839;
+            --text-color: #747474;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        /* Navbar Base Styles */
+        .navbar {
+            background-color: rgba(40, 42, 43, 0.9) !important;
+            padding: 45px 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            background-color: var(--dark-color) !important;
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Brand Logo */
+        .navbar-brand {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .navbar-brand img {
+            height: 100px;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled .navbar-brand img {
+            height: 50px;
+        }
+
+        /* Nav Links */
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            padding: 8px 12px !important;
+            text-align: center;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 80%;
+        }
+
+        /* Mobile Menu Styles */
+        .navbar-toggler {
+            border: none;
+            padding: 0.5rem;
+            z-index: 1000;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: none;
+            position: relative;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before,
+        .navbar-toggler-icon::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 2px;
+            background-color: white;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .navbar-toggler-icon::before {
+            transform: translateY(-6px);
+        }
+
+        .navbar-toggler-icon::after {
+            transform: translateY(6px);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+            background-color: transparent;
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+            transform: rotate(45deg);
+        }
+
+        .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+            transform: rotate(-45deg);
+        }
+
+        /* Mobile Collapse Menu */
+        .collapse {
+            background-color: var(--dark-color);
+            padding: 20px;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1199.98px) {
+            .navbar-brand img {
+                height: 70px;
+            }
+        }
+
+        @media (max-width: 991.98px) {
+            .navbar {
+                padding: 15px 0;
+            }
+            
+            .navbar-nav {
+                margin-top: 15px;
+            }
+            
+            .nav-link {
+                margin: 5px 0;
+                padding: 10px 15px !important;
+            }
+            
+            .navbar-brand {
+                position: static;
+                transform: none;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .navbar-toggler {
+                order: 2;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .navbar-brand img {
+                height: 60px;
+            }
+            
+            .container-fluid {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .navbar-brand img {
+                height: 50px;
+            }
+            
+            .navbar-collapse {
+                padding: 15px;
+            }
+            
+            .nav-link {
+                font-size: 0.95rem;
+            }
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-dark {
+            background-color: var(--dark-color);
+            color: white;
+        }
+
+        .section-light {
+            background-color: var(--light-color);
+        }
+
+        .section-gray {
+            background-color: var(--gray-color);
+            color: white;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--primary-color);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .section-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        /* Gallery Section - Updated for no spacing */
+        .gallery-section {
+            padding: 80px 0;
+            background-color: var(--dark-color);
+        }
+
+        .gallery-slider {
+            position: relative;
+            overflow: hidden;
+            margin: 40px 0;
+        }
+
+        .gallery-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-slide {
+            min-width: 100%;
+            padding: 0; /* Removed padding */
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 0 !important; /* Removed border radius */
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-slide a:hover img {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer Styles - Updated background color */
+        footer {
+            background-color: var(--primary-color) !important; /* Changed to primary color */
+            color: var(--dark-color);
+            padding: 60px 0 30px;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            display: inline-block;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 0 !important; /* Removed border radius */
+            color: var(--dark-color);
+            text-align: center;
+            line-height: 42px;
+            margin: 0 8px;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .social-links a:hover {
+            background-color: var(--dark-color);
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-legal-links {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 25px 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .footer-legal-links li {
+            margin: 0 15px 10px;
+        }
+
+        .footer-legal-links a {
+            color: var(--dark-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-legal-links a:hover {
+            color: var(--gray-color);
+        }
+
+        .footer-services-text {
+            color: var(--dark-color);
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+
+        .copyright {
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            padding-top: 20px;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: var(--dark-color);
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section {
+                padding: 80px 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section {
+                padding: 60px 0;
+            }
+
+            .footer-legal-links {
+                flex-direction: column;
+            }
+            
+            .footer-legal-links li {
+                margin: 5px 0;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .btn-primary-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Hero Section - Mobile First */
+        .hero-section {
+            position: relative;
+            width: 100%;
+            height: 100vh; /* Always fill viewport */
+            min-height: 300px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-align: center;
+            background: #000; /* Fallback color */
+        }
+
+        /* Dark overlay over video for readability */
+        .video-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+
+        /* Video - always covers full area, no gaps */
+        .hero-video {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            object-position: center;
+            z-index: 0;
+            background-color: #000;
+        }
+
+        /* Content above video */
+        .hero-content {
+            width: 90%;
+            max-width: 1200px;
+            padding: 20px;
+            z-index: 2;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(1.6rem, 6vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Custom button */
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            color: var(--dark-color);
+            padding: clamp(8px, 3vw, 12px) clamp(15px, 5vw, 30px);
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 0 !important;
+            font-size: clamp(0.85rem, 3vw, 1rem);
+            display: inline-block;
+        }
+        .btn-primary-custom:hover {
+            background-color: #d4c029;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tiny phones adjustments */
+        @media (max-width: 400px) {
+            .hero-content h1 { font-size: 1.35rem; }
+            .hero-content p  { font-size: 0.9rem; }
+        }
+
+        /* Landscape small devices */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .hero-section { min-height: 320px; }
+            .hero-video {
+                min-width: 100%;
+                min-height: 100%;
+            }
+            .hero-content { padding: 10px; }
+            .hero-content h1 { font-size: 1.6rem; margin-bottom: 10px; }
+            .hero-content p  { font-size: 0.9rem; margin-bottom: 14px; }
+        }
+
+        /* Tablet and up */
+        @media (min-width: 768px) {
+            .hero-section { min-height: 600px; height: 100vh; }
+            .hero-content { padding: 40px 20px; }
+        }
+
+        /* Fallback for browsers without video support */
+        .no-video .hero-video { display: none; }
+        .no-video .hero-section {
+        }
+
+        /* Reel Container Styles - FIXED */
+        .reel-container-wrapper {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1029; /* Just below navbar */
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .reel-container-wrapper.visible {
+            transform: translateY(0);
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1030;
+            transition: all 0.3s ease;
+        }
+
+        .reel-container {
+            width: 100%;
+            background-color: var(--dark-color);
+            padding: 0px 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .reel-header {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0px;
+        }
+
+        .close-reel {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+        }
+
+        .close-reel:hover {
+            color: var(--primary-color);
+        }
+
+        .view-reel {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .view-reel:hover {
+            color: var(--primary-color);
+        }
+
+        .reel-logo {
+            height: 30px;
+            filter: brightness(0) invert(1);
+            transition: filter 0.3s ease;
+        }
+
+        .view-reel:hover .reel-logo {
+            filter: brightness(0) invert(0.8) sepia(1) saturate(5) hue-rotate(5deg);
+        }
+
+        .reel-thumbnail {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            max-height: 0px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+
+        /* Video Popup Styles */
+        .video-popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.9);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-popup.active {
+            display: flex;
+        }
+
+        .video-popup-content {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+        }
+
+        .video-popup video {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            display: block;
+        }
+
+        /* Video Popup Close Button */
+        .video-popup-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            z-index: 10000;
+        }
+
+        .video-popup-close:hover {
+            color: var(--primary-color);
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .reel-header {
+                padding: 0 10px;
+            }
+            
+            .view-reel span {
+                font-size: 14px;
+            }
+            
+            .reel-logo {
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .reel-header {
+                flex-direction: column;
+                gap: 0px;
+                align-items: flex-end;
+            }
+            
+            .close-reel {
+                order: 1;
+            }
+            
+            .view-reel {
+                order: 2;
+                align-self: flex-start;
+            }
+            
+            .video-popup-close {
+                top: 10px;
+                right: 10px;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid px-3 px-sm-5">
+        <!-- Left Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex me-auto">
+            <a class="nav-link" href="index.html">INTRO</a>
+            <a class="nav-link active" href="about.html">ABOUT US</a>
+            <a class="nav-link active" href="team.html">OUR TEAM</a>
+            <a class="nav-link" href="talent.html">TALENT</a>
+        </div>
+        
+        <!-- Mobile Toggler (Hidden on desktop) -->
+        <button class="navbar-toggler ms-auto d-lg-none" type="button" 
+                data-bs-toggle="collapse" data-bs-target="#navbarCollapse" 
+                aria-controls="navbarCollapse" aria-expanded="false" 
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <!-- Centered Brand Logo -->
+        <a class="navbar-brand mx-lg-auto mx-0" href="index.html">
+            <img src="images/logo.png" alt="Logo" class="img-fluid">
+        </a>
+        
+        <!-- Right Nav Items (Hidden on mobile) -->
+        <div class="navbar-nav d-none d-lg-flex ms-auto">
+            <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+            <a class="nav-link" href="clients.html">CLIENTS</a>
+            <a class="nav-link" href="services.html">SERVICES</a>
+            <a class="nav-link" href="contact.html">CONTACT</a>
+        </div>
+        
+        <!-- Collapsible Content (Mobile only) -->
+        <div class="collapse d-lg-none" id="navbarCollapse">
+            <div class="navbar-nav">
+                <a class="nav-link" href="index.html">INTRO</a>
+                <a class="nav-link active" href="about.html">ABOUT US</a>
+                <a class="nav-link" href="talent.html">TALENT</a>
+                <a class="nav-link" href="team.html">OUR TEAM</a>
+                <a class="nav-link" href="clients.html">CLIENTS</a>
+                <a class="nav-link" href="portfolio.html">PORTFOLIO</a>
+                <a class="nav-link" href="services.html">SERVICES</a>
+                <a class="nav-link" href="contact.html">CONTACT</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="reel-container-wrapper" id="reelWrapper">
+    <div class="reel-container">
+        <div class="reel-header">
+            <button class="close-reel">&times;</button>
+            <div class="view-reel" id="viewReelBtn">
+                <img src="images/logo.png" alt="Logo" class="reel-logo">
+                <span>View Reel</span>
+            </div>
+        </div>
+        <video class="reel-thumbnail" poster="images/reel-thumbnail.jpg" muted playsinline>
+            <source src="videos/FALCON-2019-REEL-V13.mp4" type="video/mp4">
+        </video>
+    </div>
+</div>
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <video class="hero-video" autoplay muted loop playsinline>
+        <source src="videos/FALCON-2019-REEL-V13.mp4" type="video/mp4">
+    </video>
+    <div class="hero-content">
+        <h1>Falcon Productions</h1>
+        <p> fal·​con | ˈfal-kən /N./ : The fastest animal on the planet with the sharpest vision.</p>
+        <a href="video-production.html" class="btn btn-primary-custom">Recent Work</a>
+    </div>
+</section>
+
+<!-- Who We Are Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Who We Are</h2>
+                <p class="section-text">Falcon Productions is a multifaceted visual content company blending decades of experience with fresh vision and a passion for creativity.</p>
+                <a href="team.html" class="btn btn-primary-custom">Meet Our Team</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="images/whe-we-are.png" alt="Who We Are" class="img-fluid" style="border-radius: 0 !important;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- What We Do Section -->
+<section class="section section-dark">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 order-lg-2">
+                <h2 class="section-title">What We Do</h2>
+                <p class="section-text"> We create a bond with clients to develop ideas that become a visual reality. </p>
+                <a href="services.html" class="btn btn-primary-custom">Learn More</a>
+            </div>
+            <div class="col-lg-6 order-lg-1">
+                <img src="images/what-we-do.png" alt="What We Do" class="img-fluid" style="border-radius: 0 !important;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Content Production Section -->
+<section class="section section-gray">
+    <div class="container">
+        <h2 class="section-title text-center">Video Content Production</h2>
+        <p class="section-text mx-auto">Falcon Productions excels in delivering high-quality video content, seamlessly integrating years of expertise with innovative perspectives to bring creative ideas to life.</p>
+    </div>
+</section>
+
+<!-- Brand Content Section -->
+<section class="section section-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="section-title">Brand Content</h2>
+                <p class="section-text">Branded content seamlessly blends marketing and storytelling to engage audiences while conveying a brand's message.</p>
+            </div>
+            <div class="col-lg-6">
+                <img src="images/HC_Norway_photoshoot_low-71.jpg" alt="Brand Content" class="img-fluid" style="border-radius: 0 !important;">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Video Popup -->
+<div id="videoPopup" class="video-popup">
+    <button class="video-popup-close">&times;</button>
+    <div class="video-popup-content">
+        <video id="popupVideo" controls>
+            <source src="videos/FALCON-2019-REEL-V13.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row justify-content-center">
+            <!-- Social Icons -->
+            <div class="col-12 text-center mb-4">
+                <div class="social-links">
+                    <a href="https://www.facebook.com/Steins801" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/falcon.productions/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/company/falcon-productions1"  target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://www.youtube.com/channel/UCe2dyvLMoqvLpvZNTQbVtdA" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <!-- Legal Links -->
+            <div class="col-12 text-center mb-4">
+                <ul class="footer-legal-links">
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                    <li><a href="terms-of-service.html">Terms of Service</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <!-- Services Text -->
+            <div class="col-lg-8 text-center mb-4">
+                <p class="footer-services-text">
+                   At Falcon Productions, diversity drives the creative process by including alternative perspectives.  We are committed to inclusion across race, gender, age religion, and identity. That inclusion helps propel our constant evolution, and is always a factor in the production process.
+                </p>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="col-12 text-center">
+                <div class="copyright">
+                    <p>&copy; 2025 Falcon Productions. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Custom JS -->
+<script>
+    $(document).ready(function() {
+        // Navbar scroll effect
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+
+        // Position reel container properly
+        function positionReelContainer() {
+            const navbarHeight = $('.navbar').outerHeight();
+            $('#reelWrapper').css('top', navbarHeight + 'px');
+        }
+        
+        // Initial positioning
+        positionReelContainer();
+        
+        // Show reel container
+        setTimeout(() => {
+            $('#reelWrapper').addClass('visible');
+        }, 1000);
+        
+        // Update position when navbar height changes (like on scroll)
+        $(window).on('scroll resize', function() {
+            positionReelContainer();
+        });
+
+        // Get all elements
+        const reelWrapper = document.getElementById('reelWrapper');
+        const closeReelBtn = document.querySelector('.close-reel');
+        const viewReelBtn = document.getElementById('viewReelBtn');
+        const reelThumbnail = document.querySelector('.reel-thumbnail');
+        const popup = document.getElementById('videoPopup');
+        const popupVideo = document.getElementById('popupVideo');
+        const popupCloseBtn = document.querySelector('.video-popup-close');
+        
+        // Close reel container
+        closeReelBtn.addEventListener('click', function() {
+            reelWrapper.style.display = 'none';
+        });
+        
+        // Open video popup
+        function openVideoPopup() {
+            popup.classList.add('active');
+            popupVideo.play().catch(function(error) {
+                console.log('Video play failed:', error);
+            });
+        }
+        
+        // Close video popup
+        function closeVideoPopup() {
+            popup.classList.remove('active');
+            popupVideo.pause();
+        }
+        
+        // Set up click events
+        viewReelBtn.addEventListener('click', openVideoPopup);
+        reelThumbnail.addEventListener('click', openVideoPopup);
+        popupCloseBtn.addEventListener('click', closeVideoPopup);
+        
+        // Close popup when clicking outside video
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                closeVideoPopup();
+            }
+        });
+
+        // Auto-sliding gallery
+        const galleryTrack = $('#galleryTrack');
+        const slides = $('.gallery-slide');
+        const slideCount = slides.length;
+        let currentIndex = 0;
+        const slideWidth = slides.width();
+        
+        function slideGallery() {
+            currentIndex = (currentIndex + 1) % slideCount;
+            const offset = -currentIndex * slideWidth; // Removed padding
+            galleryTrack.css('transform', `translateX(${offset}px)`);
+        }
+        
+        // Start auto-sliding
+        let slideInterval = setInterval(slideGallery, 3000);
+        
+        // Pause on hover
+        $('.gallery-slider').hover(
+            function() {
+                clearInterval(slideInterval);
+            },
+            function() {
+                slideInterval = setInterval(slideGallery, 3000);
+            }
+        );
+
+        // Smooth scrolling for anchor links
+        $('a[href*="#"]').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate(
+                {
+                    scrollTop: $($(this).attr('href')).offset().top - 70,
+                },
+                500,
+                'linear'
+            );
+        });
+    });
+</script>
+</body>
+</html>
